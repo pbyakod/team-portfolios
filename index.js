@@ -169,7 +169,6 @@ function generateHTML() {
                 fs.appendFileSync('./dist/index.html', managerHTML(name, employee_id, email_address, office_number));
         }
     }
-    fs.appendFileSync('./dist/index.html', footerHTML());
 }
 
 initialize();
