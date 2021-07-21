@@ -124,10 +124,11 @@ function updateEmployees() {
 function addEngineer() {
     inquirer.prompt(engineer_questions)
         .then(answers => {
-            var {name, employee_id, email_address, office_number} = answers;
-            var person = new Engineer(name, employee_id, email_address, office_number);
+            var {name, employee_id, email_address, github_id} = answers;
+            var person = new Engineer(name, employee_id, email_address, github_id);
             employees.push(person);
         })
+        var {another} = answer;
         switch(another) {
             case 'Yes':
                 addEngineer();
@@ -143,6 +144,7 @@ function addIntern() {
             var person = new Intern(name, employee_id, email_address, office_number);
             employees.push(person);
         })
+        var {another} = answer;
         switch(another) {
             case 'Yes':
                 addIntern();
@@ -150,3 +152,24 @@ function addIntern() {
                 generateHTML();
         }
 }
+
+function generateHTML() {
+    fs.appendFileSync('./dist/index.html', headerHTML());
+    for(var i = 0; i < employees.length; i++) {
+        var position = employees[i].getPosition();
+        switch(position) {
+            case 'Engineer':
+                const {name, employee_id, email_address, github_id} = employees[i];
+                fs.appendFileSync('./dist/index.html', engineerHTML(name, employee_id, email_address, github_id));
+            case 'Intern':
+                const {name, employee_id, email_address, school_name} = employees[i];
+                fs.appendFileSync('./dist/index.html', internHTML(name, employee_id, email_address, school_name));
+            case 'Manager':
+                const {name, employee_id, email_address, office_number} = employees[i];
+                fs.appendFileSync('./dist/index.html', managerHTML(name, employee_id, email_address, office_number));
+        }
+    }
+    fs.appendFileSync('./dist/index.html', footerHTML());
+}
+
+initialize();
