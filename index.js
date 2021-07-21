@@ -7,8 +7,8 @@ const employees = [];
 var prompt_questions = [
     {
         type: 'input',
-        message: 'Enter the name of the TEAM MANAGER',
-        name: 'team_manager',
+        message: 'Enter the NAME of the team manager',
+        name: 'name',
     },
     {
         type: 'input',
@@ -27,11 +27,34 @@ var prompt_questions = [
     },
 ]
 
+var engineer_questions = [
+    {
+        type: 'input',
+        message: 'Enter your NAME',
+        name: 'name',
+    },
+    {
+        type: 'input',
+        message: 'Enter your EMPLOYEE ID',
+        name: 'employeee_id',
+    },
+    {
+        type: 'input',
+        message: 'Enter a valid EMAIL ADDRESS',
+        name: 'email_address',
+    },
+    {
+        type: 'input',
+        message: 'Enter your GITHUB username',
+        name: 'github_id',
+    },
+]
+
 function initialize() {
     inquirer.prompt(prompt_questions)
         .then(answers => {
-            var {team_manager, employee_id, email_address, office_number} = answers;
-            var person = new Manager(team_manager, employee_id, email_address, office_number);
+            var {name, employee_id, email_address, office_number} = answers;
+            var person = new Manager(name, employee_id, email_address, office_number);
             employees.push(person);
             updateEmployees();
         })
@@ -45,11 +68,19 @@ function updateEmployees() {
         {
             type: 'input',
             message: 'Are you adding an ENGINEER or an INTERN?',
-            choices: ['Engineer', 'Intern', 'None'],
+            choices: ['Engineer', 'Intern'],
             name: 'position'
         }
     ])
     .then(answer => {
         var {position} = answer;
+        switch(position) {
+            case 'Engineer':
+                addEngineer();
+            case 'Intern':
+                addIntern();
+            default:
+                break;
+        }
     })
 }
