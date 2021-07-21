@@ -34,3 +34,7 @@ node index.js
 ## Webpage Preview
 
 <img src="./images/preview.png" alt="Preview Image"></img>
+
+## Walkthrough Video Link
+
+<a href="https://drive.google.com/file/d/1LOgZyjJZNXZ74rfG5DlvpglCIRYj4Jz1/view?usp=sharing">Link to video</a>

@@ -1,4 +1,4 @@
-function headerHTML () {
+function headerHTML() {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -22,4 +22,4 @@ function headerHTML () {
     `
 }
   
-module.exports = headTemplate;
+module.exports = headerHTML;

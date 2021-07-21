@@ -1,8 +1,12 @@
-const fs = reequire('fs');
+const fs = require('fs');
 const inquirer = require('inquirer');
 const Engineer = require('./lib/engineer_class');
 const Intern = require('./lib/intern_class');
 const Manager = require('./lib/manager_class');
+const headerHTML = require('./src/headerHTML');
+const engineerHTML = require('./src/engineerHTML');
+const internHTML = require('./src/internHTML');
+const managerHTML = require('./src/managerHTML');
 
 const employees = [];
 
@@ -112,11 +116,11 @@ function updateEmployees() {
     ])
     .then(answer => {
         var {position} = answer;
-        switch(position) {
-            case 'Engineer':
-                addEngineer();
-            case 'Intern':
-                addIntern();
+        if(position == 'Engineer') {
+            addEngineer();
+        }
+        if(position == 'Intern') {
+            addIntern();
         }
     })
 }
@@ -124,49 +128,48 @@ function updateEmployees() {
 function addEngineer() {
     inquirer.prompt(engineer_questions)
         .then(answers => {
-            var {name, employee_id, email_address, github_id} = answers;
-            var person = new Engineer(name, employee_id, email_address, github_id);
-            employees.push(person);
-        })
-        var {another} = answer;
-        switch(another) {
-            case 'Yes':
+            var {name, employee_id, email_address, github_id, another} = answers;
+            var engineer = new Engineer(name, employee_id, email_address, github_id);
+            employees.push(engineer);
+            if(another === 'Yes') {
                 addEngineer();
-            case 'No':
+            }
+            else {
                 generateHTML();
-        }
+            }
+        })
 }
 
 function addIntern() {
     inquirer.prompt(intern_questions)
         .then(answers => {
-            var {name, employee_id, email_address, office_number} = answers;
-            var person = new Intern(name, employee_id, email_address, office_number);
-            employees.push(person);
-        })
-        var {another} = answer;
-        switch(another) {
-            case 'Yes':
+            var {name, employee_id, email_address, school_name, another} = answers;
+            var intern = new Intern(name, employee_id, email_address, school_name);
+            employees.push(intern);
+            if(another == 'Yes') {
                 addIntern();
-            case 'No':
+            }
+            else {
                 generateHTML();
-        }
+            }
+        })
 }
 
 function generateHTML() {
     fs.appendFileSync('./dist/index.html', headerHTML());
     for(var i = 0; i < employees.length; i++) {
         var position = employees[i].getPosition();
-        switch(position) {
-            case 'Engineer':
+        if(position == 'Engineer') {
                 const {name, employee_id, email_address, github_id} = employees[i];
                 fs.appendFileSync('./dist/index.html', engineerHTML(name, employee_id, email_address, github_id));
-            case 'Intern':
-                const {name, employee_id, email_address, school_name} = employees[i];
-                fs.appendFileSync('./dist/index.html', internHTML(name, employee_id, email_address, school_name));
-            case 'Manager':
-                const {name, employee_id, email_address, office_number} = employees[i];
-                fs.appendFileSync('./dist/index.html', managerHTML(name, employee_id, email_address, office_number));
+        }
+        if(position == 'Intern') {
+            const {name, employee_id, email_address, school_name} = employees[i];
+            fs.appendFileSync('./dist/index.html', internHTML(name, employee_id, email_address, school_name));
+        }
+        if(position == 'Manager') {
+            const {name, employee_id, email_address, office_number} = employees[i];
+            fs.appendFileSync('./dist/index.html', managerHTML(name, employee_id, email_address, office_number));
         }
     }
 }
