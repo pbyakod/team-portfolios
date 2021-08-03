@@ -15,7 +15,7 @@ Before starting up this program, its esseential to have a few files installed on
 First, clone this repository using your terminal/command-line interface. 
 
 ```
-git clone git@github.com:pbyakod/team_portfolios.git
+git clone git@github.com:pbyakod/team-portfolios.git
 ```
 
 Next, install the inquirer node packages using the efollowing commands.
