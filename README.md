@@ -1,7 +1,5 @@
 # Team Portfolio Generator
 
-## License 
-
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
 
 ## Short Description
@@ -15,7 +13,7 @@ Before starting up this program, its esseential to have a few files installed on
 First, clone this repository using your terminal/command-line interface. 
 
 ```
-git clone git@github.com:pbyakod/team-portfolios.git
+git clone git@github.com:pbyakod/team-profile-generator.git
 ```
 
 Next, install the inquirer node packages using the efollowing commands.
@@ -37,4 +35,4 @@ node index.js
 
 ## Walkthrough Video Link
 
-<a href="https://drive.google.com/file/d/1LOgZyjJZNXZ74rfG5DlvpglCIRYj4Jz1/view?usp=sharing">Link to video</a>
+<a href="https://drive.google.com/file/d/1LOgZyjJZNXZ74rfG5DlvpglCIRYj4Jz1/view?usp=sharing">Walkthrough Video</a>
